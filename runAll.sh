@@ -1,1 +1,1 @@
-build/compile.sh && build/runTest.sh
+rm out/*; javac src/*java  -d out; cd out; java InputScanner;
