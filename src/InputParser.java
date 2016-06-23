@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class InputParser {
     private String oversDetail;
@@ -10,31 +9,22 @@ public class InputParser {
         this.oversDetail = oversDetail;
     }
 
-    public ArrayList<Over> getOvers() {
-        int oversLength = (int) Math.ceil(totalOvers());
-        ArrayList<Over> overs = new ArrayList<>(oversLength);
-        for (int i = 0; i < oversLength; i++) {
-            overs.add(getDetailsOfOver(i));
-        }
-        return overs;
+    private String[] formattedData() {
+        return oversDetail.trim().replaceAll(" +", " ").split(" ");
     }
 
-
-//    public boolean isValid() {
-//        return isValidBallValue() && isValidCharacters();
-//    }
-
-    private boolean isValidBallValue() {
-        String[] separatedBallsData = oversDetail.split("\\s+");
-        for (String ballValue : separatedBallsData) {
-            if (ballValue.toString().length() != 1) {
-                return false;
-            }
+    private ArrayList<Ball> nthOverData(int over) {
+        String[] separatedBallsData = formattedData();
+        int from = over * OVER_LENGTH;
+        int to = from + OVER_LENGTH;
+        if (to > separatedBallsData.length) {
+            to = separatedBallsData.length;
         }
-        return true;
+        String[] overData = Arrays.copyOfRange(separatedBallsData, from, to);
+        return convertIntoBalls(overData);
     }
 
-    public double totalOvers() {
+    private double totalOvers() {
         int totalBalls = formattedData().length;
         int ballsLeftOfIncompleteOver = totalBalls % OVER_LENGTH;
         int completedOvers = (int) Math.floor(totalBalls / OVER_LENGTH);
@@ -42,44 +32,38 @@ public class InputParser {
         return totalCalculatedOvers;
     }
 
-    public Over getDetailsOfOver(int over) {
+    private Over getDetailsOfOver(int over) {
         if (totalOvers() > over) {
             return new Over(nthOverData(over));
         }
-        char[] emptyArray = new char[0];
-        return new Over(emptyArray);
+        return new Over(new ArrayList(0));
     }
 
-    private char[] formattedData() {
-        return oversDetail.replace(" ", "").toCharArray();
-    }
-
-    private char[] nthOverData(int over) {
-        char[] separatedBallsData = formattedData();
-        int from = over * OVER_LENGTH;
-        int to = from + OVER_LENGTH;
-        if (to > separatedBallsData.length) {
-            to = separatedBallsData.length;
+    private ArrayList<Ball> convertIntoBalls(String[] overData) {
+        ArrayList<Ball> balls = new ArrayList<>(overData.length);
+        for (String ballValue : overData) {
+            balls.add(new Ball(ballValue));
         }
-        char[] overData = Arrays.copyOfRange(separatedBallsData, from, to);
-        return overData;
+        return balls;
     }
 
-    public boolean isValidCharacters() {
-        if(isValidBallValue()){
-            char[] validCharacters = {'1', '2', '3', '4', '5', '6', 'W','w'};
-            String validCharactersList = new String(validCharacters);
-            char[] oversData = formattedData();
-            for (char ballValue : oversData) {
-                if (validCharactersList.indexOf(ballValue) == -1) {
-                    return false;
-                }
+    public ArrayList<Over> getOvers() {
+        int oversLength = (int) Math.ceil(totalOvers());
+        ArrayList<Over> overs = new ArrayList<Over>(oversLength);
+        for (int i = 0; i < oversLength; i++) {
+            overs.add(getDetailsOfOver(i));
+        }
+        return overs;
+    }
+
+    public boolean isValid() {
+        String validator = "[0-9]+|W|w";
+        String[] oversData = formattedData();
+        for (String ballValue : oversData) {
+            if (!ballValue.matches(validator)) {
+                return false;
             }
-            return true;
         }
-        return false;
+        return true;
     }
-
-//    public void getOverOfNthWicket(String wicketNumber) {
-//    }
 }
