@@ -1,5 +1,7 @@
 package parser;
 
+import ball.Ball;
+
 import java.util.ArrayList;
 
 public class InputParser {
@@ -33,11 +35,11 @@ public class InputParser {
         return (completedOvers * OVER_LENGTH) + remainingBalls;
     }
 
-    public ArrayList<String> getBalls() {
+    public ArrayList<Ball> getBalls() {
         String[] balls = formattedData();
-        ArrayList<String> ballsCollection = new ArrayList<>();
+        ArrayList<Ball> ballsCollection = new ArrayList<>();
         for (int i = 0; i < ballsThreshold(); i++) {
-            ballsCollection.add(balls[i]);
+            ballsCollection.add(new Ball(i+1, balls[i]));
         }
         return ballsCollection;
     }
