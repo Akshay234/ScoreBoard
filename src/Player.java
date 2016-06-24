@@ -4,6 +4,7 @@ public class Player {
     private int position;
     private int ballsPlayed;
     private int runs;
+    private int runsConsided;
     private int totalBallsDelivered;
     private int wicketsTaken;
 
@@ -15,6 +16,7 @@ public class Player {
         this.ballsPlayed = 0;
         this.totalBallsDelivered = 0;
         this.wicketsTaken = 0;
+        this.runsConsided = 0;
     }
 
     public void updateRuns(int runs) {
@@ -23,10 +25,6 @@ public class Player {
 
     public void incrementBallsPlayed() {
         ballsPlayed += 1;
-    }
-
-    public int upcomingPlayerPosition() {
-        return position+1;
     }
 
     public void incrementBallsDelivery() {
@@ -41,15 +39,19 @@ public class Player {
         wicketsTaken += 1;
     }
 
-    public String getName(){
+    public String name(){
         return name;
     }
 
-    public int getBallsPlayed() {
+    public int ballsPlayed() {
         return ballsPlayed;
     }
 
     public int scored() {
         return runs;
+    }
+
+    public void updateRunsConsided(int runs) {
+        runsConsided += runs;
     }
 }
