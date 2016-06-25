@@ -1,6 +1,7 @@
 package teams;
 
 import ball.Ball;
+import ball.Balls;
 import player.Player;
 import player.Players;
 
@@ -8,12 +9,13 @@ import java.util.Observable;
 import java.util.Observer;
 
 public class BattingTeam implements Observer {
-    private static final int INITIAL_NEXT_DOWN_POSITION = 3;
+    private static final int INITIAL_NEXT_DOWN_POSITION = 2;
     private Players team;
     private Player onStrike;
     private Player onNonStrike;
     private int nextDown;
     private Player lastBatsmanOut;
+    private boolean islastBall = false;
 
     private BattingTeam(Players team, Player onStrike, Player onNonStrike) {
         this.team = team;
@@ -23,8 +25,8 @@ public class BattingTeam implements Observer {
     }
 
     public static BattingTeam create(Players batsmans) {
-        Player playerOnStrike = batsmans.get(1);
-        Player playerOnNonStrike = batsmans.get(2);
+        Player playerOnStrike = batsmans.get(0);
+        Player playerOnNonStrike = batsmans.get(1);
         return new BattingTeam(batsmans, playerOnStrike, playerOnNonStrike);
     }
 
@@ -43,8 +45,9 @@ public class BattingTeam implements Observer {
     }
 
     private void switchPlayersIfOverComplete(Ball ball) {
-        if (ball.last()) {
+        if (islastBall) {
             switchOnCreasePlayers();
+            islastBall = false;
         }
     }
 
@@ -53,6 +56,7 @@ public class BattingTeam implements Observer {
             switchOnCreasePlayers();
         }
     }
+
 
     private void setNextPlayerIfOut(Ball ball) {
         if (ball.isWicket()) {
@@ -89,7 +93,11 @@ public class BattingTeam implements Observer {
 
     @Override
     public void update(Observable o, Object ball) {
-        updateRecord((Ball) ball);
+        if (ball.getClass().equals(Boolean.class)) {
+            islastBall = true;
+        } else {
+            updateRecord((Ball) ball);
+        }
     }
 
 }

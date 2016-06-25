@@ -1,12 +1,9 @@
 package ball;
 
 public class Ball {
-    private static final int OVER_LENGTH = 6;
-    private int ballNumber;
     private final String value;
 
-    public Ball(int ballNumber, String value) {
-        this.ballNumber = ballNumber;
+    public Ball(String value) {
         this.value = value;
     }
 
@@ -31,9 +28,5 @@ public class Ball {
 
     public int wicket() {
         return isWicket() ? 1 : 0;
-    }
-
-    public boolean last() {
-        return ballNumber % OVER_LENGTH == 0;
     }
 }

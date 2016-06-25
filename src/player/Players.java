@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Players {
     private ArrayList<Player> players;
 
-    private Players(ArrayList<Player> names) {
+    public Players(ArrayList<Player> names) {
         players = names;
     }
 

@@ -30,12 +30,12 @@ public class Displayer {
 
     private String playerOnStrikeStatistics() {
         Player playerOnStrike = battingTeam.playerOnStrike();
-        return ">>> player.Player on the batting end is Mr. " + playerOnStrike.name() + ", he has played a total of " + playerOnStrike.ballsPlayed() + " scoring " + playerOnStrike.scored() + " runs.";
+        return ">>> Player on the batting end is Mr. " + playerOnStrike.name() + ", he has played a total of " + playerOnStrike.ballsPlayed()+ " balls" + " scoring " + playerOnStrike.scored() + " runs.";
     }
 
     private String playerOnNonStrikeStatistics() {
         Player playerOnNonStrike = battingTeam.playerOnNonStrike();
-        return ">>> On the non-striker’s end is Mr. " + playerOnNonStrike.name() + ", he has played a total of " + playerOnNonStrike.ballsPlayed() + " scoring " + playerOnNonStrike.scored() + " runs.";
+        return ">>> On the non-striker’s end is Mr. " + playerOnNonStrike.name() + ", he has played a total of " + playerOnNonStrike.ballsPlayed()+ " balls" + " scoring " + playerOnNonStrike.scored() + " runs.";
     }
 
     private String lastBatsmanOutStatistics() {

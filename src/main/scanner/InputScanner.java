@@ -44,6 +44,7 @@ public class InputScanner {
         BowlingTeam bowlingTeam = BowlingTeam.create(dummyBowlers());
 
         Balls balls = new Balls(inputParser.getBalls());
+        balls.addObserver(battingTeam);
         RunsTracker runsTracker = new RunsTracker();
         WicketsTracker wicketsTracker = new WicketsTracker();
         ScoreBoard scoreBoard = new ScoreBoard();
