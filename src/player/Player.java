@@ -3,22 +3,16 @@ package player;
 public class Player {
 
     private final String name;
-    private int position;
     private int ballsPlayed;
     private int runs;
-    private int runsConsided;
     private int totalBallsDelivered;
-    private int wicketsTaken;
 
 
-    public Player(String name, int position) {
+    public Player(String name) {
         this.name = name;
-        this.position = position;
         this.runs = 0;
         this.ballsPlayed = 0;
         this.totalBallsDelivered = 0;
-        this.wicketsTaken = 0;
-        this.runsConsided = 0;
     }
 
     public void updateRuns(int runs) {
@@ -37,10 +31,6 @@ public class Player {
         return totalBallsDelivered >= 6;
     }
 
-    public void creditWicket() {
-        wicketsTaken += 1;
-    }
-
     public String name(){
         return name;
     }
@@ -53,7 +43,4 @@ public class Player {
         return runs;
     }
 
-    public void updateRunsConsided(int runs) {
-        runsConsided += runs;
-    }
 }

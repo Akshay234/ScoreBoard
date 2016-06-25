@@ -1,36 +1,30 @@
 package player;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Players {
-    private HashMap<Integer, Player> players;
+    private ArrayList<Player> players;
 
-    private Players(HashMap<Integer, Player> players) {
-        this.players = players;
-    }
-
-    public static Players create(ArrayList<String> names) {
-        HashMap<Integer, Player> playersMapping = new HashMap<>(names.size());
-        int position = 1;
-        for (String name : names) {
-            playersMapping.put(position, new Player(name, position));
-            position++;
-        }
-        return new Players(playersMapping);
+    private Players(ArrayList<Player> names) {
+        players = names;
     }
 
     public Player get(int playerPosition) {
         return players.get(playerPosition);
     }
 
-    public Player getNextOf(Player player) {
-        for (int key : players.keySet()) {
-            if (players.get(key).equals(player) && players.containsKey(key++)) {
-                return players.get(key++);
-            }
+    public static Players create(ArrayList<String> names) {
+        ArrayList<Player> playersMapping = new ArrayList<>();
+        for (String name : names) {
+            playersMapping.add(new Player(name));
         }
-        return players.get(1);
+        return new Players(playersMapping);
+    }
+
+    public Player getNextOf(Player givenPlayer) {
+        int positionOfCurrentPlayer = players.indexOf(givenPlayer);
+        Player nextPlayer = players.get(positionOfCurrentPlayer++);
+        return (nextPlayer != null) ? nextPlayer : players.get(0);
     }
 
 }

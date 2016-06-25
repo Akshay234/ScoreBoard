@@ -35,17 +35,10 @@ public class BowlingTeam implements Observer {
         }
     }
 
-    private void creditWicketIfAny(Ball ball) {
-        if (ball.isWicket()) {
-            lastWicketTakerBowler = currentBowler;
-            currentBowler.creditWicket();
-        }
-    }
+
 
     private void updateRecord(Ball ball) {
         currentBowler.incrementBallsDelivery();
-        currentBowler.updateRunsConsided(ball.runs());
-        creditWicketIfAny(ball);
         changeBowlerIfOverCompleted();
     }
 
