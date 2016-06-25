@@ -1,5 +1,12 @@
+package scanner;
+
 import ball.Balls;
 import parser.InputParser;
+import show.Displayer;
+import teams.BattingTeam;
+import teams.BowlingTeam;
+import tracker.RunsTracker;
+import tracker.WicketsTracker;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -26,7 +33,6 @@ public class InputScanner {
             scoreBoard.update(balls);
             Displayer displayer = new Displayer(battingTeam, bowlingTeam, runsTracker, wicketsTracker);
             System.out.println(displayer.displayUpto(inputParser.ballsThreshold()));
-
         } else {
             throw new Exception("Given [ " + oversDetail + " ] are Invalid");
         }
@@ -34,20 +40,34 @@ public class InputScanner {
 
     private static Players dummyBatsmans() {
         ArrayList<String> batsmansList = new ArrayList<String>();
-        batsmansList.add("W");
-        batsmansList.add("X");
-        batsmansList.add("Y");
-        batsmansList.add("Z");
+        batsmansList.add("Bat1");
+        batsmansList.add("Bat2");
+        batsmansList.add("Bat3");
+        batsmansList.add("Bat4");
+        batsmansList.add("Bat5");
+        batsmansList.add("Bat6");
+        batsmansList.add("Bat7");
+        batsmansList.add("Bat8");
+        batsmansList.add("Bat9");
+        batsmansList.add("Bat10");
+        batsmansList.add("Bat11");
         return Players.create(batsmansList);
 
     }
 
     private static Players dummyBowlers() {
         ArrayList<String> bowlersList = new ArrayList<>();
-        bowlersList.add("A");
-        bowlersList.add("B");
-        bowlersList.add("C");
-        bowlersList.add("D");
+        bowlersList.add("Bow1");
+        bowlersList.add("Bow2");
+        bowlersList.add("Bow3");
+        bowlersList.add("Bow4");
+        bowlersList.add("Bow5");
+        bowlersList.add("Bow6");
+        bowlersList.add("Bow7");
+        bowlersList.add("Bow8");
+        bowlersList.add("Bow9");
+        bowlersList.add("Bow10");
+        bowlersList.add("Bow11");
         return Players.create(bowlersList);
     }
 

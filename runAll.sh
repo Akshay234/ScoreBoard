@@ -1,1 +1,1 @@
-rm out/*; javac src/*java  -d out; cd out; java InputScanner;
+rm -rf out/*; javac src/*java  -d out; cd out; java scanner.InputScanner;

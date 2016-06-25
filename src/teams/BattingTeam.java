@@ -1,20 +1,23 @@
+package teams;
+
 import ball.Ball;
 
 import java.util.Observable;
 import java.util.Observer;
 
 public class BattingTeam implements Observer {
-    private Players batsmans;
+    private static final int INITIAL_NEXT_DOWN_POSITION = 3;
+    private Players team;
     private Player onStrike;
     private Player onNonStrike;
-    private int positionOfUpcomingPlayer;
+    private int nextDown;
     private Player lastBatsmanOut;
 
-    private BattingTeam(Players batsmans, Player onStrike, Player onNonStrike) {
-        this.batsmans = batsmans;
+    private BattingTeam(Players team, Player onStrike, Player onNonStrike) {
+        this.team = team;
         this.onStrike = onStrike;
         this.onNonStrike = onNonStrike;
-        this.positionOfUpcomingPlayer = 3;
+        this.nextDown = INITIAL_NEXT_DOWN_POSITION;
     }
 
     public static BattingTeam create(Players batsmans) {
@@ -24,11 +27,11 @@ public class BattingTeam implements Observer {
     }
 
     private void updatePlayerOnStrike() {
-        this.onStrike = batsmans.get(positionOfUpcomingPlayer);
+        this.onStrike = team.get(nextDown);
     }
 
     private void updateNextPlayerTracker() {
-        positionOfUpcomingPlayer += 1;
+        nextDown += 1;
     }
 
     private void switchOnCreasePlayers() {

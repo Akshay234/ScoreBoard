@@ -1,3 +1,10 @@
+package show;
+
+import teams.BattingTeam;
+import teams.BowlingTeam;
+import tracker.RunsTracker;
+import tracker.WicketsTracker;
+
 public class Displayer {
 
     private final BattingTeam battingTeam;
@@ -22,17 +29,22 @@ public class Displayer {
 
     private String playerOnStrikeStatistics(int balls) {
         Player playerOnStrike = battingTeam.playerOnStrike();
-        return ">>> Player on the batting end is Mr. " + playerOnStrike.name() + ", he has played a total of " +playerOnStrike.ballsPlayed() + " scoring "+  playerOnStrike.scored() +" runs.";
+        return ">>> Player on the batting end is Mr. " + playerOnStrike.name() + ", he has played a total of " + playerOnStrike.ballsPlayed() + " scoring " + playerOnStrike.scored() + " runs.";
     }
 
     private String playerOnNonStrikeStatistics(int balls) {
         Player playerOnNonStrike = battingTeam.playerOnNonStrike();
-        return ">>> On the non-striker’s end is Mr. " + playerOnNonStrike.name() + ", he has played a total of " + playerOnNonStrike.ballsPlayed() + " scoring "+  playerOnNonStrike.scored() +" runs.";
+        return ">>> On the non-striker’s end is Mr. " + playerOnNonStrike.name() + ", he has played a total of " + playerOnNonStrike.ballsPlayed() + " scoring " + playerOnNonStrike.scored() + " runs.";
     }
 
     private String lastBatsmanOutStatistics() {
         Player batsmanGotOut = battingTeam.lastBatsmanGotOut();
-        return ">>> Mr "+ batsmanGotOut.name() +" got out playing a total of "+ batsmanGotOut.ballsPlayed()+" balls scoring "+batsmanGotOut.scored()+" runs.";
+        return ">>> Mr " + batsmanGotOut.name() + " got out playing a total of " + batsmanGotOut.ballsPlayed() + " balls scoring " + batsmanGotOut.scored() + " runs.";
+    }
+
+    private String lastBowlerCreditWithWicketTemplate() {
+        Player lastWicketTaker = bowlingTeam.lastWicketTaker();
+        return " Bowler " + lastWicketTaker.name() + " is credited with his wicket!";
     }
 
     public String displayUpto(int balls) {
@@ -44,10 +56,5 @@ public class Displayer {
                 append("\n").append(lastBatsmanOutStatistics()).
                 append(lastBowlerCreditWithWicketTemplate())
         );
-    }
-
-    private String lastBowlerCreditWithWicketTemplate() {
-        Player lastWicketTaker = bowlingTeam.lastWicketTaker();
-        return " Bowler "+lastWicketTaker.name()+" is credited with his wicket!";
     }
 }

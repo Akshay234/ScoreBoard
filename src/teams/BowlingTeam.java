@@ -1,16 +1,18 @@
+package teams;
+
 import ball.Ball;
 
 import java.util.Observable;
 import java.util.Observer;
 
 public class BowlingTeam implements Observer {
-    private Players bowlers;
+    private Players team;
     private Player currentBowler;
     private Player nextBowler;
     private Player lastWicketTakerBowler;
 
-    public BowlingTeam(Players bowlers, Player currentBowler, Player nextBowler) {
-        this.bowlers = bowlers;
+    public BowlingTeam(Players team, Player currentBowler, Player nextBowler) {
+        this.team = team;
         this.currentBowler = currentBowler;
         this.nextBowler = nextBowler;
     }
@@ -23,7 +25,7 @@ public class BowlingTeam implements Observer {
 
     private void changeBowler() {
         currentBowler = nextBowler;
-        nextBowler = bowlers.getNextOf(currentBowler);
+        nextBowler = team.getNextOf(currentBowler);
     }
 
     private void changeBowlerIfOverCompleted() {
