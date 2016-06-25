@@ -1,7 +1,28 @@
 package parser.validate;
 
-/**
- * Created by akshaykumarsharma on 25/06/2016.
- */
-public class OverDetailsValidator {
+import exceptions.InvalidOverDetailsException;
+
+public class OverDetailsValidator extends Validator {
+
+    private String oversData;
+
+    public OverDetailsValidator(String oversData) {
+        this.oversData = oversData;
+    }
+
+    private String[] formattedData() {
+        return oversData.trim().replaceAll(" +", " ").split(" ");
+    }
+
+    @Override
+    public void validate() throws InvalidOverDetailsException {
+        String validator = "[0-9]+|W|w";
+
+        for (String ballValue : formattedData()) {
+            if (!ballValue.matches(validator)) {
+                throw new InvalidOverDetailsException(oversData);
+            }
+        }
+    }
+
 }
