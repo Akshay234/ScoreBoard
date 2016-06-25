@@ -3,6 +3,9 @@ package scanner;
 import ball.Balls;
 import main.ScoreBoard;
 import parser.InputParser;
+import parser.validate.OverDetailsValidator;
+import parser.validate.OverThresholdValidator;
+import parser.validate.Validators;
 import player.Players;
 import show.Displayer;
 import teams.BattingTeam;
@@ -15,33 +18,38 @@ import java.util.Scanner;
 
 public class InputScanner {
 
-    private static void display(String oversDetail, double overBuffer) throws Exception {
-
-        InputParser inputParser = new InputParser(oversDetail, overBuffer);
-
-        if (inputParser.isValid()) {
-
-            BattingTeam battingTeam = BattingTeam.create(dummyBatsmans());
-            BowlingTeam bowlingTeam = BowlingTeam.create(dummyBowlers());
-
-            Balls balls = new Balls(inputParser.getBalls());
-            RunsTracker runsTracker = new RunsTracker();
-            WicketsTracker wicketsTracker = new WicketsTracker();
-            ScoreBoard scoreBoard = new ScoreBoard();
-            scoreBoard.addObserver(battingTeam);
-            scoreBoard.addObserver(bowlingTeam);
-            scoreBoard.addObserver(runsTracker);
-            scoreBoard.addObserver(wicketsTracker);
-            scoreBoard.update(balls);
-            Displayer displayer = new Displayer(battingTeam, bowlingTeam, runsTracker, wicketsTracker);
-            System.out.println(displayer.displayUpto(inputParser.ballsThreshold()));
-        } else {
-            throw new Exception("Given [ " + oversDetail + " ] are Invalid");
+    private static void display(String oversDetail, double overBuffer) {
+        Validators validators = new Validators();
+        validators.add(new OverDetailsValidator(oversDetail));
+        validators.add(new OverThresholdValidator(overBuffer));
+        try {
+            InputParser inputParser = InputParser.create(oversDetail, overBuffer, validators);
+            process(inputParser);
+        } catch (Exception exception) {
+            System.out.println("\nError: ");
+            System.out.println(exception.getMessage());
         }
     }
 
+    private static void process(InputParser inputParser) {
+        BattingTeam battingTeam = BattingTeam.create(dummyBatsmans());
+        BowlingTeam bowlingTeam = BowlingTeam.create(dummyBowlers());
+
+        Balls balls = new Balls(inputParser.getBalls());
+        RunsTracker runsTracker = new RunsTracker();
+        WicketsTracker wicketsTracker = new WicketsTracker();
+        ScoreBoard scoreBoard = new ScoreBoard();
+        scoreBoard.addObserver(battingTeam);
+        scoreBoard.addObserver(bowlingTeam);
+        scoreBoard.addObserver(runsTracker);
+        scoreBoard.addObserver(wicketsTracker);
+        scoreBoard.update(balls);
+        Displayer displayer = new Displayer(battingTeam, bowlingTeam, runsTracker, wicketsTracker);
+        System.out.println(displayer.displayUpto(inputParser.ballsThreshold()));
+    }
+
     private static Players dummyBatsmans() {
-        ArrayList<String> batsmansList = new ArrayList<String>();
+        ArrayList<String> batsmansList = new ArrayList<>();
         batsmansList.add("Bat1");
         batsmansList.add("Bat2");
         batsmansList.add("Bat3");
@@ -73,7 +81,7 @@ public class InputScanner {
         return Players.create(bowlersList);
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
 

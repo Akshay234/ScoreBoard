@@ -21,11 +21,11 @@ public class Displayer {
     }
 
     private String totalRunsTemplate(int balls) {
-        return ">>> Total runs : " + runsTracker.totalUpto(balls);
+        return ">>> Total runs : " + runsTracker.total();
     }
 
     private String totalWicketsTemplate(int balls) {
-        return ">>> Wickets : " + wicketsTracker.totalUpto(balls);
+        return ">>> Wickets : " + wicketsTracker.total();
     }
 
     private String playerOnStrikeStatistics(int balls) {
