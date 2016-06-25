@@ -50,12 +50,13 @@ public class Displayer {
 
     public String displayUpto(int balls) {
         StringBuilder statistics = new StringBuilder();
-        return String.valueOf(statistics.append(totalRunsTemplate(balls)).
+        statistics = statistics.append(totalRunsTemplate(balls)).
                 append("\n").append(totalWicketsTemplate(balls)).
                 append("\n").append(playerOnStrikeStatistics(balls)).
-                append("\n").append(playerOnNonStrikeStatistics(balls)).
-                append("\n").append(lastBatsmanOutStatistics()).
-                append(lastBowlerCreditWithWicketTemplate())
-        );
+                append("\n").append(playerOnNonStrikeStatistics(balls));
+        if (bowlingTeam.lastWicketTaker() != null) {
+            statistics = statistics.append("\n").append(lastBatsmanOutStatistics()).append(lastBowlerCreditWithWicketTemplate());
+        }
+        return String.valueOf(statistics);
     }
 }
