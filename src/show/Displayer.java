@@ -30,7 +30,7 @@ public class Displayer {
 
     private String playerOnStrikeStatistics() {
         Player playerOnStrike = battingTeam.playerOnStrike();
-        return ">>> player.Player on the batting end is Mr. " + playerOnStrike.name() + ", he has played a total of " + playerOnStrike.ballsPlayed() + " scoring " + playerOnStrike.scored() + " runs.";
+        return ">>> Player on the batting end is Mr. " + playerOnStrike.name() + ", he has played a total of " + playerOnStrike.ballsPlayed() + " scoring " + playerOnStrike.scored() + " runs.";
     }
 
     private String playerOnNonStrikeStatistics() {

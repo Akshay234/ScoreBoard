@@ -36,7 +36,7 @@ public class InputParser {
         String[] balls = formattedData();
         ArrayList<Ball> ballsCollection = new ArrayList<>();
         for (int i = 0; i < ballsThreshold(); i++) {
-            ballsCollection.add(new Ball(i + 1, balls[i]));
+            ballsCollection.add(new Ball(balls[i]));
         }
         return ballsCollection;
     }

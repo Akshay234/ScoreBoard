@@ -1,10 +1,9 @@
 package ball;
 
-import ball.Ball;
-
 import java.util.ArrayList;
+import java.util.Observable;
 
-public class Balls {
+public class Balls extends Observable {
     private final ArrayList<Ball> balls;
 
     public Balls(ArrayList<Ball> balls) {
@@ -12,7 +11,16 @@ public class Balls {
     }
 
     public Ball get(int providedBalls) {
-        return balls.get(providedBalls);
+        Ball ball = balls.get(providedBalls);
+        if (isLastBall(ball)){
+            setChanged();
+            notifyObservers(true);
+        }
+        return ball;
+    }
+
+    private boolean isLastBall(Ball ball) {
+        return ((balls.indexOf(ball) + 1) % 6 == 0);
     }
 
     public int total() {
