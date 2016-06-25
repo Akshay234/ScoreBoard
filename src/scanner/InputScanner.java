@@ -1,7 +1,9 @@
 package scanner;
 
 import ball.Balls;
+import main.ScoreBoard;
 import parser.InputParser;
+import player.Players;
 import show.Displayer;
 import teams.BattingTeam;
 import teams.BowlingTeam;

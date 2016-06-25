@@ -1,5 +1,6 @@
 package show;
 
+import player.Player;
 import teams.BattingTeam;
 import teams.BowlingTeam;
 import tracker.RunsTracker;
@@ -29,7 +30,7 @@ public class Displayer {
 
     private String playerOnStrikeStatistics(int balls) {
         Player playerOnStrike = battingTeam.playerOnStrike();
-        return ">>> Player on the batting end is Mr. " + playerOnStrike.name() + ", he has played a total of " + playerOnStrike.ballsPlayed() + " scoring " + playerOnStrike.scored() + " runs.";
+        return ">>> player.Player on the batting end is Mr. " + playerOnStrike.name() + ", he has played a total of " + playerOnStrike.ballsPlayed() + " scoring " + playerOnStrike.scored() + " runs.";
     }
 
     private String playerOnNonStrikeStatistics(int balls) {

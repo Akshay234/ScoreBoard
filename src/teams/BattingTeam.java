@@ -1,6 +1,8 @@
 package teams;
 
 import ball.Ball;
+import player.Player;
+import player.Players;
 
 import java.util.Observable;
 import java.util.Observer;

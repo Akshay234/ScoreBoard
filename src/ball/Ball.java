@@ -1,6 +1,5 @@
 package ball;
 
-import parser.InputParser;
 public class Ball {
     private static final int OVER_LENGTH = 6;
     private int ballNumber;
