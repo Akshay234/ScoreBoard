@@ -1,7 +1,9 @@
 package main.scanner;
 
 import ball.Balls;
-import main.ScoreBoard;
+import exceptions.InvalidOverDetailsException;
+import exceptions.InvalidOverThresholdException;
+import main.scoreBoard.ScoreBoard;
 import parser.InputParser;
 import parser.validate.OverDetailsValidator;
 import parser.validate.OverThresholdValidator;
@@ -21,14 +23,20 @@ public class InputScanner {
     private static void display(String oversDetail, double overBuffer) {
         Validators validators = new Validators();
         validators.add(new OverDetailsValidator(oversDetail));
-        validators.add(new OverThresholdValidator(overBuffer));
+        validators.add(new OverThresholdValidator(oversDetail, overBuffer));
         try {
             InputParser inputParser = InputParser.create(oversDetail, overBuffer, validators);
             process(inputParser);
-        } catch (Exception exception) {
-            System.out.println("\nError: ");
-            System.out.println(exception.getMessage());
+        } catch (InvalidOverDetailsException exception) {
+            printErrorMessage(exception.getMessage());
+        } catch (InvalidOverThresholdException exception) {
+            printErrorMessage(exception.getMessage());
         }
+    }
+
+    private static void printErrorMessage(String message) {
+        System.out.println("\nError: ");
+        System.out.println(message);
     }
 
     private static void process(InputParser inputParser) {
