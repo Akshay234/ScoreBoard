@@ -21,9 +21,9 @@ public class WicketsTracker implements Observer, Calculable {
     }
 
     @Override
-    public int totalUpto(int threshold) {
+    public int total() {
         int wickets = 0;
-        for (int i = 0; i < threshold; i++) {
+        for (int i = 0; i < balls.size(); i++) {
             wickets += balls.get(i);
         }
         return wickets;

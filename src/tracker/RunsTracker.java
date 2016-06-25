@@ -21,9 +21,9 @@ public class RunsTracker implements Observer, Calculable {
     }
 
     @Override
-    public int totalUpto(int threshold) {
+    public int total() {
         int runs = 0;
-        for (int i = 0; i < threshold; i++) {
+        for (int i = 0; i < balls.size(); i++) {
             runs += balls.get(i);
         }
         return runs;
