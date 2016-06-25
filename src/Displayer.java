@@ -1,38 +1,53 @@
 public class Displayer {
-    String[] details;// should be genric;
-    private int totalRuns;
-    private int totalWickets;
-    private Players batsmans;
-    private Players bowlers;
-    // can pass multiple fields to displayer and show them in formated way , things like wicket taker , on strike player, on onstrike player.
 
-    public Displayer(int totalRuns, int totalWickets, Players batsmans, Players bowlers) {
-        this.totalRuns = totalRuns;
-        this.totalWickets = totalWickets;
-        this.batsmans = batsmans;
-        this.bowlers = bowlers;
+    private final BattingTeam battingTeam;
+    private final BowlingTeam bowlingTeam;
+    private final RunsTracker runsTracker;
+    private final WicketsTracker wicketsTracker;
+
+    public Displayer(BattingTeam battingTeam, BowlingTeam bowlingTeam, RunsTracker runsTracker, WicketsTracker wicketsTracker) {
+        this.battingTeam = battingTeam;
+        this.bowlingTeam = bowlingTeam;
+        this.runsTracker = runsTracker;
+        this.wicketsTracker = wicketsTracker;
     }
 
-    private String totalRunsTemplate() {
-        return ">>> Total runs : " + totalRuns;
+    private String totalRunsTemplate(int balls) {
+        return ">>> Total runs : " + runsTracker.totalUpto(balls);
     }
 
-    private String totalWicketsTemplate() {
-        return ">>> Wickets : " + totalWickets;
+    private String totalWicketsTemplate(int balls) {
+        return ">>> Wickets : " + wicketsTracker.totalUpto(balls);
     }
 
-    private String playerOnStrikeStatistics() {
-        return "Player on the batting end is Mr. " + batsmans.onStrike().getName() + ", he has played a total of " +batsmans.onStrike().getBallsPlayed() + " scoring "+  batsmans.onStrike().scored() +" runs.";
+    private String playerOnStrikeStatistics(int balls) {
+        Player playerOnStrike = battingTeam.playerOnStrike();
+        return ">>> Player on the batting end is Mr. " + playerOnStrike.name() + ", he has played a total of " +playerOnStrike.ballsPlayed() + " scoring "+  playerOnStrike.scored() +" runs.";
     }
 
-    private String playerOnNonStrikeStatistics() {
-        return "On the non-striker’s end is Mr. " + batsmans.onNonStrike().getName() + ", he has played a total of " +batsmans.onNonStrike().getBallsPlayed() + " scoring "+  batsmans.onNonStrike().scored() +" runs.";
+    private String playerOnNonStrikeStatistics(int balls) {
+        Player playerOnNonStrike = battingTeam.playerOnNonStrike();
+        return ">>> On the non-striker’s end is Mr. " + playerOnNonStrike.name() + ", he has played a total of " + playerOnNonStrike.ballsPlayed() + " scoring "+  playerOnNonStrike.scored() +" runs.";
     }
 
+    private String lastBatsmanOutStatistics() {
+        Player batsmanGotOut = battingTeam.lastBatsmanGotOut();
+        return ">>> Mr "+ batsmanGotOut.name() +" got out playing a total of "+ batsmanGotOut.ballsPlayed()+" balls scoring "+batsmanGotOut.scored()+" runs.";
+    }
 
-    @Override
-    public String toString() {
+    public String displayUpto(int balls) {
         StringBuilder statistics = new StringBuilder();
-        return String.valueOf(statistics.append(totalRunsTemplate()).append("\n").append(totalWicketsTemplate()).append("\n").append(playerOnStrikeStatistics()).append("\n").append(playerOnNonStrikeStatistics()));
+        return String.valueOf(statistics.append(totalRunsTemplate(balls)).
+                append("\n").append(totalWicketsTemplate(balls)).
+                append("\n").append(playerOnStrikeStatistics(balls)).
+                append("\n").append(playerOnNonStrikeStatistics(balls)).
+                append("\n").append(lastBatsmanOutStatistics()).
+                append(lastBowlerCreditWithWicketTemplate())
+        );
+    }
+
+    private String lastBowlerCreditWithWicketTemplate() {
+        Player lastWicketTaker = bowlingTeam.lastWicketTaker();
+        return " Bowler "+lastWicketTaker.name()+" is credited with his wicket!";
     }
 }
