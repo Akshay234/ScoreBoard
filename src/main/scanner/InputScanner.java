@@ -53,7 +53,7 @@ public class InputScanner {
         scoreBoard.addObserver(wicketsTracker);
         scoreBoard.update(balls);
         Displayer displayer = new Displayer(battingTeam, bowlingTeam, runsTracker, wicketsTracker);
-        System.out.println(displayer.displayUpto(inputParser.ballsThreshold()));
+        System.out.println(displayer.display());
     }
 
     private static Players dummyBatsmans() {

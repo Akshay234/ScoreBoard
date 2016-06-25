@@ -20,20 +20,20 @@ public class Displayer {
         this.wicketsTracker = wicketsTracker;
     }
 
-    private String totalRunsTemplate(int balls) {
+    private String totalRunsTemplate() {
         return ">>> Total runs : " + runsTracker.total();
     }
 
-    private String totalWicketsTemplate(int balls) {
+    private String totalWicketsTemplate() {
         return ">>> Wickets : " + wicketsTracker.total();
     }
 
-    private String playerOnStrikeStatistics(int balls) {
+    private String playerOnStrikeStatistics() {
         Player playerOnStrike = battingTeam.playerOnStrike();
         return ">>> player.Player on the batting end is Mr. " + playerOnStrike.name() + ", he has played a total of " + playerOnStrike.ballsPlayed() + " scoring " + playerOnStrike.scored() + " runs.";
     }
 
-    private String playerOnNonStrikeStatistics(int balls) {
+    private String playerOnNonStrikeStatistics() {
         Player playerOnNonStrike = battingTeam.playerOnNonStrike();
         return ">>> On the non-striker’s end is Mr. " + playerOnNonStrike.name() + ", he has played a total of " + playerOnNonStrike.ballsPlayed() + " scoring " + playerOnNonStrike.scored() + " runs.";
     }
@@ -48,12 +48,12 @@ public class Displayer {
         return " Bowler " + lastWicketTaker.name() + " is credited with his wicket!";
     }
 
-    public String displayUpto(int balls) {
+    public String display() {
         StringBuilder statistics = new StringBuilder();
-        statistics = statistics.append(totalRunsTemplate(balls)).
-                append("\n").append(totalWicketsTemplate(balls)).
-                append("\n").append(playerOnStrikeStatistics(balls)).
-                append("\n").append(playerOnNonStrikeStatistics(balls));
+        statistics = statistics.append(totalRunsTemplate()).
+                append("\n").append(totalWicketsTemplate()).
+                append("\n").append(playerOnStrikeStatistics()).
+                append("\n").append(playerOnNonStrikeStatistics());
         if (bowlingTeam.lastWicketTaker() != null) {
             statistics = statistics.append("\n").append(lastBatsmanOutStatistics()).append(lastBowlerCreditWithWicketTemplate());
         }
