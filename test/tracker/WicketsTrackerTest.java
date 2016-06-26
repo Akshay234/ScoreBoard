@@ -5,7 +5,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class RunsTrackerTest {
+public class WicketsTrackerTest {
     Ball ball_with_0_runs;
     Ball ball_with_1_runs;
     Ball ball_with_2_runs;
@@ -21,12 +21,13 @@ public class RunsTrackerTest {
 
     @Test
     public void should_give_a_total_of_runs_taken_on_given_balls() {
-        RunsTracker runsTracker = new RunsTracker();
-        runsTracker.update(null, ball_with_0_runs);
-        runsTracker.update(null, ball_with_1_runs);
-        runsTracker.update(null, ball_with_wicket);
-        runsTracker.update(null, ball_with_2_runs);
+        WicketsTracker wicketsTracker = new WicketsTracker();
+        wicketsTracker.update(null, ball_with_0_runs);
+        wicketsTracker.update(null, ball_with_1_runs);
+        wicketsTracker.update(null, ball_with_wicket);
+        wicketsTracker.update(null, ball_with_2_runs);
+        wicketsTracker.update(null, ball_with_wicket);
 
-        Assert.assertEquals(3, runsTracker.total());
+        Assert.assertEquals(2, wicketsTracker.total());
     }
 }
