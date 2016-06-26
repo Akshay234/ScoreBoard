@@ -1,4 +1,5 @@
 package teams;
+
 import ball.Ball;
 import player.Player;
 import player.Players;
@@ -10,7 +11,7 @@ public class BowlingTeam implements Observer {
     private Players team;
     private Player currentBowler;
     private Player nextBowler;
-    private Player lastWicketTakerBowler;
+    private Player lastWicketTakingBowler;
 
     public BowlingTeam(Players team, Player currentBowler, Player nextBowler) {
         this.team = team;
@@ -19,8 +20,8 @@ public class BowlingTeam implements Observer {
     }
 
     public static BowlingTeam create(Players bowlers) {
-        Player currentBowler = bowlers.get(1);
-        Player nextBowler = bowlers.get(2);
+        Player currentBowler = bowlers.get(0);
+        Player nextBowler = bowlers.get(1);
         return new BowlingTeam(bowlers, currentBowler, nextBowler);
     }
 
@@ -36,14 +37,21 @@ public class BowlingTeam implements Observer {
     }
 
 
-
     private void updateRecord(Ball ball) {
         currentBowler.incrementBallsDelivery();
+        updateWicketTakingBowlerIfWicket(ball);
         changeBowlerIfOverCompleted();
+
+    }
+
+    private void updateWicketTakingBowlerIfWicket(Ball ball) {
+        if (ball.isWicket()) {
+            lastWicketTakingBowler = currentBowler;
+        }
     }
 
     public Player lastWicketTaker() {
-        return lastWicketTakerBowler;
+        return lastWicketTakingBowler;
     }
 
     @Override

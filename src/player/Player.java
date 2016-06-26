@@ -42,5 +42,4 @@ public class Player {
     public int scored() {
         return runs;
     }
-
 }
