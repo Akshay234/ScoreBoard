@@ -161,6 +161,7 @@ public class BattingTeamTest {
         battingTeam.update(null, ball2);
         battingTeam.update(null, ball2);
         battingTeam.update(null, ball2);
+        battingTeam.update(null,true);
         battingTeam.update(null, ball2);
 
 
