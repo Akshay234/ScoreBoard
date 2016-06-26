@@ -14,8 +14,8 @@ public class BallsTest {
     public void ShouldShowTotalNoOfBalls() throws Exception {
          ArrayList<Ball> balls = new ArrayList<>();
 
-        Ball ball1 = new Ball(1,"1");
-        Ball ball2 = new Ball(2,"2");
+        Ball ball1 = new Ball("1");
+        Ball ball2 = new Ball("2");
 
         balls.add(ball1);
         balls.add(ball2);

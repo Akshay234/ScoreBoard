@@ -14,8 +14,8 @@ public class BallTest {
 
     @Test
     public void shouldCheckIfRunsOnThatBallIsOddRun() throws Exception {
-        Ball ball1 = new Ball(1,"1");
-        Ball ball2 = new Ball(2,"2");
+        Ball ball1 = new Ball("1");
+        Ball ball2 = new Ball("2");
 
         assertTrue(ball1.isOddRun());
         assertFalse(ball2.isOddRun());
@@ -24,8 +24,8 @@ public class BallTest {
 
     @Test
     public void shouldCheckWicketonThatBall() throws Exception {
-        Ball ball1 = new Ball(1,"W");
-        Ball ball2 = new Ball(2,"2");
+        Ball ball1 = new Ball("W");
+        Ball ball2 = new Ball("2");
         assertTrue(ball1.isWicket());
         assertFalse(ball2.isWicket());
 
@@ -33,24 +33,15 @@ public class BallTest {
 
     @Test
     public void ShouldReturnScoredRunsTillThatBalls() throws Exception {
-        Ball ball1 = new Ball(1,"1");
+        Ball ball1 = new Ball("1");
         assertEquals(1,ball1.runs());
     }
 
     @Test
     public void wicket() throws Exception {
-        Ball ball1 = new Ball(1,"W");
+        Ball ball1 = new Ball("W");
         assertEquals(1,ball1.wicket());
 
-    }
-
-    @Test
-    public void ShouldCheckTheGivenballIsLastBallOfTheOver() throws Exception {
-        Ball ball1 = new Ball(1,"W");
-        Ball ball6 = new Ball(6,"2");
-
-        assertTrue(ball6.last());
-        assertFalse(ball1.last());
     }
 
 }

@@ -1,7 +1,6 @@
 package teams;
 
 import ball.Ball;
-import ball.Balls;
 import player.Player;
 import player.Players;
 
@@ -15,7 +14,7 @@ public class BattingTeam implements Observer {
     private Player onNonStrike;
     private int nextDown;
     private Player lastBatsmanOut;
-    private boolean islastBall = false;
+    private boolean isLastBall = false;
 
     private BattingTeam(Players team, Player onStrike, Player onNonStrike) {
         this.team = team;
@@ -45,9 +44,9 @@ public class BattingTeam implements Observer {
     }
 
     private void switchPlayersIfOverComplete(Ball ball) {
-        if (islastBall) {
+        if (isLastBall) {
             switchOnCreasePlayers();
-            islastBall = false;
+            isLastBall = false;
         }
     }
 
@@ -94,7 +93,7 @@ public class BattingTeam implements Observer {
     @Override
     public void update(Observable o, Object ball) {
         if (ball.getClass().equals(Boolean.class)) {
-            islastBall = true;
+            isLastBall = true;
         } else {
             updateRecord((Ball) ball);
         }
