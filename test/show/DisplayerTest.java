@@ -13,10 +13,10 @@ import tracker.WicketsTracker;
 import java.util.ArrayList;
 
 public class DisplayerTest {
-    BattingTeam battingTeam;
-    BowlingTeam bowlingTeam;
-    RunsTracker runsTracker;
-    WicketsTracker wicketsTracker;
+    private BattingTeam battingTeam;
+    private BowlingTeam bowlingTeam;
+    private RunsTracker runsTracker;
+    private WicketsTracker wicketsTracker;
 
     @Before
     public void setUp() throws Exception {
