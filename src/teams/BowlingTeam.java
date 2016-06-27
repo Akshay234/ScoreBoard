@@ -13,7 +13,7 @@ public class BowlingTeam implements Observer {
     private Player nextBowler;
     private Player lastWicketTakingBowler;
 
-    public BowlingTeam(Players team, Player currentBowler, Player nextBowler) {
+    private BowlingTeam(Players team, Player currentBowler, Player nextBowler) {
         this.team = team;
         this.currentBowler = currentBowler;
         this.nextBowler = nextBowler;
