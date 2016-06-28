@@ -20,4 +20,8 @@ public class Validators {
             validator.validate();
         }
     }
+
+    public ArrayList<Validator> getValidators() {
+        return validators;
+    }
 }
