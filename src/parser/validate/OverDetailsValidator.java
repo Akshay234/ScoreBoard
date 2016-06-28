@@ -25,4 +25,7 @@ public class OverDetailsValidator extends Validator {
         }
     }
 
+    public String getOversData() {
+        return oversData;
+    }
 }
