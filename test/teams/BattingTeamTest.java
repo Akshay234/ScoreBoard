@@ -119,6 +119,7 @@ public class BattingTeamTest {
         battingTeam.update(null,ball1);
         battingTeam.update(null,ball1);
         battingTeam.update(null,ball1);
+        battingTeam.update(null,true);
         battingTeam.update(null,ball2);
 
         assertEquals("p2", battingTeam.playerOnStrike().name());

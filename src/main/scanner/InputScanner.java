@@ -4,6 +4,7 @@ import ball.Balls;
 import exceptions.InvalidOverDetailsException;
 import exceptions.InvalidOverThresholdException;
 import main.scoreBoard.ScoreBoard;
+import parser.InputFormatter;
 import parser.InputParser;
 import parser.validate.OverDetailsValidator;
 import parser.validate.OverThresholdValidator;
@@ -21,11 +22,13 @@ import java.util.Scanner;
 public class InputScanner {
 
     private static void display(String oversDetail, double overBuffer) {
+        InputFormatter inputFormatter = new InputFormatter(oversDetail);
+        String[] formattedData = inputFormatter.format();
         Validators validators = new Validators();
-        validators.add(new OverDetailsValidator(oversDetail));
-        validators.add(new OverThresholdValidator(oversDetail, overBuffer));
+        validators.add(new OverDetailsValidator(formattedData));
+        validators.add(new OverThresholdValidator(formattedData, overBuffer));
         try {
-            InputParser inputParser = InputParser.create(oversDetail, overBuffer, validators);
+            InputParser inputParser = InputParser.create(formattedData, overBuffer, validators);
             process(inputParser);
         } catch (InvalidOverDetailsException exception) {
             printErrorMessage(exception.getMessage());

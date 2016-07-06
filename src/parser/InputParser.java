@@ -9,21 +9,17 @@ import java.util.ArrayList;
 
 public class InputParser {
     private static final int OVER_LENGTH = 6;
-    private String oversDetail;
+    private String[] oversDetail;
     private double overThreshold;
 
-    private InputParser(String oversDetail, double overThreshold) {
+    private InputParser(String[] oversDetail, double overThreshold) {
         this.oversDetail = oversDetail;
         this.overThreshold = overThreshold;
     }
 
-    public static InputParser create(String oversDetail, double overThreshold, Validators validators) throws InvalidOverDetailsException, InvalidOverThresholdException {
+    public static InputParser create(String[] oversDetail, double overThreshold, Validators validators) throws InvalidOverDetailsException, InvalidOverThresholdException {
         validators.validate();
-        return new InputParser(oversDetail,overThreshold);
-    }
-
-    private String[] formattedData() {
-        return oversDetail.trim().replaceAll(" +", " ").split(" ");
+        return new InputParser(oversDetail, overThreshold);
     }
 
     public int ballsThreshold() {
@@ -33,10 +29,9 @@ public class InputParser {
     }
 
     public ArrayList<Ball> getBalls() {
-        String[] balls = formattedData();
         ArrayList<Ball> ballsCollection = new ArrayList<>();
         for (int i = 0; i < ballsThreshold(); i++) {
-            ballsCollection.add(new Ball(balls[i]));
+            ballsCollection.add(new Ball(oversDetail[i]));
         }
         return ballsCollection;
     }

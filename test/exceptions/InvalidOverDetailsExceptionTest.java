@@ -11,9 +11,9 @@ public class InvalidOverDetailsExceptionTest {
 
     @Test
     public void should_throw_InvalidOverDetailsException_with_detailed_error_message_when_called() throws InvalidOverDetailsException {
-        String invalidData = "foobar";
+        String[] invalidData = {"foobar"};
         exception.expect(InvalidOverDetailsException.class);
-        exception.expectMessage("foobar is a invalid data.");
+        exception.expectMessage("{ foobar } is a invalid data.");
         throw new InvalidOverDetailsException(invalidData);
     }
 }
